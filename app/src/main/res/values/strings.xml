@@ -1,0 +1,5 @@
+<resources>
+    <!--    app模块使用到的字符串资源-->
+    <string name="app_name">zhongmubao_kotlin</string>
+    <string name="string_global_error">全局统一错误页</string>
+</resources>

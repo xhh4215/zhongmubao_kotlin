@@ -1,0 +1,12 @@
+ include ':service_login'
+include ':biz_login'
+include ':biz_home'
+include ':pub_model'
+include ':lib_common'
+include ':app'
+include ':lib_ui'
+project(":lib_ui").projectDir = "../zhongmu_ui/lib_ui" as File
+
+include ':lib_library'
+project(":lib_library").projectDir = "../zhongmu_library/zhongmu_lib" as File
+rootProject.name = "zhongmubao_kotlin"

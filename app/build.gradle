@@ -1,0 +1,57 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'com.alibaba.arouter'
+}
+apply from: "../project_config.gradle"
+def ext = rootProject.ext
+def dependency = rootProject.ext.dependencies
+
+android {
+    compileSdkVersion = ext.compileSdkVersion
+    buildToolsVersion = ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "zhongmu.org.project"
+        minSdkVersion ext.minSdkVersion
+        targetSdkVersion ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        配置arouter文件的生成位置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), "room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api dependency.appcompat
+    implementation dependency.arouter_api
+    kapt dependency.arouter_compiler
+    implementation project(path: ':pub_model')
+    implementation project(path: ':lib_common')
+    implementation project(path: ':lib_library')
+    implementation project(path: ':lib_ui')
+    implementation project(path: ':biz_home')
+    implementation project(path: ':biz_login')
+
+}
